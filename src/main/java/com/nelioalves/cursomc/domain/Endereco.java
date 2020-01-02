@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 /**
  * @author m.albuquerque
  *
@@ -27,6 +29,7 @@ public class Endereco implements Serializable {
 	private String bairro;
 	private String cep;
 
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
@@ -35,6 +38,9 @@ public class Endereco implements Serializable {
 	@JoinColumn(name="cidade_id")
 	private Cidade cidade;
 
+	public Endereco() {
+	}
+	
 	public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep,
 			Cliente cliente, Cidade cidade) {
 		super();
@@ -54,12 +60,6 @@ public class Endereco implements Serializable {
 		int result = 1;
 		result = prime * result + ((Id == null) ? 0 : Id.hashCode());
 		return result;
-	}
-
-	@Override
-	public String toString() {
-		return "Endereco [Id=" + Id + ", logradouro=" + logradouro + ", numero=" + numero + ", complemento="
-				+ complemento + ", bairro=" + bairro + ", cep=" + cep + ", cliente=" + cliente + "]";
 	}
 
 	@Override
