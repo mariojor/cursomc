@@ -1,6 +1,6 @@
 package com.nelioalves.cursomc.dto;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 
 import javax.validation.constraints.NotEmpty;
 
