@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -24,6 +25,7 @@ import com.nelioalves.cursomc.security.JWTUtil;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Autowired
@@ -36,7 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	private JWTUtil jwtUtil;
 	
 	public static final String[] PUBLIC_MATCHES = {"/h2-console/**"};
-	public static final String[] PUBLIC_MATCHES_GET = {"/produtos/**", "/categorias/**", "/clientes/**" };
+	public static final String[] PUBLIC_MATCHES_GET = {"/produtos/**", "/categorias/**"};
+	public static final String[] PUBLIC_MATCHES_POST = {"/clientes/**" };
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -47,6 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		http.cors().and().csrf().disable();
 		http.authorizeRequests()
+		.antMatchers(HttpMethod.POST, PUBLIC_MATCHES_POST).permitAll()
 		.antMatchers(HttpMethod.GET, PUBLIC_MATCHES_GET).permitAll()
 		.antMatchers(PUBLIC_MATCHES).permitAll()
 		.anyRequest().authenticated();
