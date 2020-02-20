@@ -10,3 +10,6 @@ mysql -u root -p
 Liberar acesso ao email do gmail.
 https://www.google.com/settings/security/lesssecureapps
 https://accounts.google.com/b/0/DisplayUnlockCaptcha
+
+Pegar a zona do AWS s3
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html
